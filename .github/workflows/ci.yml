@@ -1,0 +1,31 @@
+name: ci
+on: [pull_request, push]
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+        env: { VITE_SUPABASE_URL: http://127.0.0.1:54321, VITE_SUPABASE_ANON_KEY: ci-placeholder }
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - uses: supabase/setup-cli@v1
+      - run: npm ci
+      - run: supabase start
+      - run: supabase test db
+      - run: |
+          supabase functions serve --env-file supabase/functions/.env.example --no-verify-jwt &
+          sleep 15
+          eval "$(bash scripts/load-local-env.sh)"
+          npm run test:security

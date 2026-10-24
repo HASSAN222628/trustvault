@@ -1,0 +1,56 @@
+# Minimal local config. If the CLI complains about a missing key, run
+# `supabase init` in a scratch folder and copy any new defaults across.
+project_id = "trustvault"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]   # NOTE: the private `app` schema is NOT exposed
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 15
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173"]
+jwt_expiry = 3600
+enable_signup = true
+enable_refresh_token_rotation = true
+minimum_password_length = 10
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false   # local only; ENABLE in production
+
+# verify_jwt = false because every function authenticates in code with
+# auth.getUser() (validated by the Auth server). See docs/architecture.md.
+[functions.document-upload]
+verify_jwt = false
+[functions.document-download]
+verify_jwt = false
+[functions.document-edit]
+verify_jwt = false
+[functions.document-delete]
+verify_jwt = false
+[functions.document-grant]
+verify_jwt = false
+[functions.document-revoke]
+verify_jwt = false
+[functions.admin-audit-query]
+verify_jwt = false
+[functions.admin-set-role]
+verify_jwt = false
+[functions.admin-manage-user]
+verify_jwt = false

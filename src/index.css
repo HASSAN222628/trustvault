@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 204 22% 96%; --surface: 0 0% 100%; --ink: 210 30% 11%; --muted: 211 12% 38%;
+    --line: 208 16% 85%; --rail: 210 34% 12%;
+    --accent: 180 82% 24%; --accent-strong: 180 85% 17%; --accent-soft: 180 40% 92%;
+    --danger: 4 70% 40%; --danger-soft: 4 80% 96%; --warn: 38 90% 26%; --warn-soft: 40 90% 94%;
+    --ok: 145 55% 24%; --ok-soft: 145 40% 93%;
+  }
+  body { @apply bg-bg font-sans text-ink antialiased; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-accent; outline-style: solid; }
+  h1 { @apply text-2xl font-semibold tracking-tight; }
+  h2 { @apply text-base font-semibold; }
+}
+@layer components {
+  .card { @apply rounded-lg border border-line bg-surface shadow-raised; }
+  .field { @apply w-full rounded-md border border-line bg-surface px-3 py-2 text-sm placeholder:text-muted/70 disabled:opacity-60; }
+  .field[aria-invalid='true'] { @apply border-danger; }
+  .label { @apply mb-1 block text-sm font-medium; }
+  .err { @apply mt-1 text-sm text-danger; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

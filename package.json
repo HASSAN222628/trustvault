@@ -1,0 +1,60 @@
+{
+  "name": "trustvault",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:security": "vitest run --config vitest.security.config.ts",
+    "test:db": "supabase test db",
+    "test:e2e": "playwright test",
+    "db:reset": "supabase db reset",
+    "seed:demo": "tsx scripts/seed-demo-data.ts"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "3.9.0",
+    "@supabase/supabase-js": "2.45.4",
+    "clsx": "2.1.1",
+    "lucide-react": "0.453.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "7.53.0",
+    "react-router-dom": "6.27.0",
+    "tailwind-merge": "2.5.4",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.13.0",
+    "@playwright/test": "1.48.2",
+    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/react": "16.0.1",
+    "@testing-library/user-event": "14.5.2",
+    "@types/node": "22.8.7",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "4.3.3",
+    "autoprefixer": "10.4.20",
+    "eslint": "9.13.0",
+    "eslint-plugin-react-hooks": "5.0.0",
+    "globals": "15.11.0",
+    "jsdom": "25.0.1",
+    "postcss": "8.4.47",
+    "prettier": "3.3.3",
+    "tailwindcss": "3.4.14",
+    "tsx": "4.19.2",
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.12.2",
+    "vite": "5.4.10",
+    "vitest": "2.1.4"
+  }
+}
